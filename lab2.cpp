@@ -24,10 +24,10 @@
  ***/
 int main(void)
 {
-    // Declare firstname and lastname strings
+    // Declare firstname and lastname strings.
     std::string firstname, lastname;
 
-    // Request input from user
+    // Request input from user.
     std::cout << "First name: " << std::flush;
     std::cin >> firstname;
     std::cout << "Last name:  " << std::flush;
@@ -44,6 +44,27 @@ int main(void)
                    lastname.end(),    // Input end iterator
                    lastname.begin(),  // Output start iterator
                    ::tolower);        // Scope-resolved operator
+
+    // Assert that input is alpha only.
+    std::string alpha = "abcdefghijklmnopqrstuvwxyz ";  // Alpha and space
+    if(firstname.find_first_not_of(alpha) != std::string::npos)
+    {
+        // Firstname contains non-alpha characters.
+        std::cout <<
+            "Firstname must only contain alpha characters and space." <<
+            std::endl;
+        // Terminate unsuccessfully
+        return EXIT_FAILURE;
+    }
+    if(lastname.find_first_not_of(alpha) != std::string::npos)
+    {
+        // Lastname contains non-alpha characters.
+        std::cout <<
+            "Lastname must only contain alpha characters and space." <<
+            std::endl;
+        // Terminate unsuccessfully
+        return EXIT_FAILURE;
+    }
 
     // Declare list of vowels
     std::list<char> vowels = {'a', 'e', 'i', 'o', 'u'};
