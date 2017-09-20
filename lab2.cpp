@@ -27,11 +27,16 @@ int main(void)
     // Declare firstname and lastname strings.
     std::string firstname, lastname;
 
-    // Request input from user.
+    // Request first name from user.
     std::cout << "First name: " << std::flush;
     std::cin >> firstname;
+    // Dump the buffer in case they entered any whitespace.
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    // Request last name from user.
     std::cout << "Last name:  " << std::flush;
     std::cin >> lastname;
+    // Dump the buffer in case they entered any whitespace.
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
     // Downcase firstname via in-place transformation
     std::transform(firstname.begin(), // Input start iterator
@@ -46,13 +51,12 @@ int main(void)
                    ::tolower);        // Scope-resolved operator
 
     // Assert that input is alpha only.
-    std::string alpha = "abcdefghijklmnopqrstuvwxyz ";  // Alpha and space
+    std::string alpha = "abcdefghijklmnopqrstuvwxyz";  // Alphabetic characters
     if(firstname.find_first_not_of(alpha) != std::string::npos)
     {
         // Firstname contains non-alpha characters.
         std::cout <<
-            "Firstname must only contain alpha characters and space." <<
-            std::endl;
+            "Firstname must only contain alphabetic characters." << std::endl;
         // Terminate unsuccessfully
         return EXIT_FAILURE;
     }
@@ -60,8 +64,7 @@ int main(void)
     {
         // Lastname contains non-alpha characters.
         std::cout <<
-            "Lastname must only contain alpha characters and space." <<
-            std::endl;
+            "Lastname must only contain alpha characters." << std::endl;
         // Terminate unsuccessfully
         return EXIT_FAILURE;
     }
